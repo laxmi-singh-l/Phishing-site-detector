@@ -1,16 +1,28 @@
-from fastapi import FastAPI, Request
-from pydantic import BaseModel
-from typing import Optional
-import uvicorn
-from fastapi.templating import Jinja2Templates
-from fastapi.responses import HTMLResponse
+from flask import Flask, render_template, request
+import pickle
 
-app = FastAPI()
+app = Flask(__name__)
+
+vector = pickle.load(open('vectorizer.pkl', 'rb'))
+model = pickle.load(open('phishing.pkl', 'rb'))
 
 
-@app.get("/")
-def read_root():
-    return templates.TemplateResponse("index.html", {"request": request})
+@app.route('/', methods = ['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        url = request.form['url']
+        predict = model.predict(vector.transform([url]))
+        return render_template("index.html")
+        
+    
+  
+        
+        
+        
+    else:
+        return render_template("index.html")
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+if __name__== "__main__":
+    app.run(debug=True) 
