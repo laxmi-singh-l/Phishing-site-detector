@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-import pickle
+import pickle 
 
 app = Flask(__name__)
 
@@ -11,10 +11,12 @@ model = pickle.load(open('phishing.pkl', 'rb'))
 def index():
     if request.method == 'POST':
         url = request.form['url']
+        print(url)
         predict = model.predict(vector.transform([url]))
-        return render_template("index.html")
+        print(predict)
+        return render_template("index.html", predict = predict)
         
-        
+
         
     else:
         return render_template("index.html")
