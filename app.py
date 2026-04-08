@@ -14,9 +14,6 @@ def index():
         predict = model.predict(vector.transform([url]))
         return render_template("index.html")
         
-    
-  
-        
         
         
     else:
