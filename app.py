@@ -24,12 +24,12 @@ def index():
         # print(predict)
 
         if predict == 'bad':
-            predict = " Sale teri lgne wali ha i , click mt kr diyo"
+            predict = "Don't Click , site is not safe"
 
         elif predict == 'good':
-            predict = "Aram se kr bhai , koi dikkat nhi hai"
+            predict = "Site is safe for your system"
         else :
-            predict = "kuch to locha hai"
+            predict = "Something is Wrong"
 
 
 
